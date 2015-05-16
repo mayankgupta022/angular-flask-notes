@@ -5,31 +5,38 @@ define(['angular', 'services'], function (angular) {
 	/* Controllers */
 	
 	return angular.module('myApp.controllers', ['myApp.services'])
-		// Sample controller where service is being used
+
 		.controller('NoteListCtrl', ['$scope', '$http', function ($scope, $http) {
 
-				$http.get(document.url + 'notes.json').
+				$http.get(document.url + 'notes').
 				success(function(data, status, headers, config) {
-					$scope.notes = data;
+					$scope.notes = data.data;
 				}).
 				error(function(data, status, headers, config) {
 					console.log(data);
 				});
 		}])
-		// More involved example where controller is required from an external file
+
 		.controller('NoteDetailsCtrl', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
 			console.log($routeParams.noteId);
 			if($routeParams.noteId != 'new')
-				$http.get(document.url + 'note/' + $routeParams.noteId + '.json').
+				$http.get(document.url + 'note/' + $routeParams.noteId).
 					success(function(data, status, headers, config) {
-						$scope.notes = data;
+						$scope.note = data.data;
 					}).
 					error(function(data, status, headers, config) {
 						console.log(data);
 					});
 
 			$scope.saveNote = function() {
-				$http.post(document.url + 'note/' + $routeParams.noteId + '.json', $scope.note).
+				var url
+				if($routeParams.noteId == 'new')
+					url = document.url + 'newNote';
+				else
+					url = document.url + 'saveNote';
+
+				console.log($scope.note);
+				$http.post(url, $scope.note).
 					success(function(data, status, headers, config) {
 						$scope.notes = data;
 					}).
@@ -39,7 +46,7 @@ define(['angular', 'services'], function (angular) {
 			};
 
 			$scope.deleteNote = function() {
-				$http.post(document.url + 'delNote/' + $routeParams.noteId + '.json', $scope.note).
+				$http.post(document.url + 'delNote/' + $routeParams.noteId, $scope.note).
 					success(function(data, status, headers, config) {
 						$scope.notes = data;
 					}).
