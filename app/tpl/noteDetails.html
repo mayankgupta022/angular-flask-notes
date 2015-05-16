@@ -1,0 +1,16 @@
+<div ng-include="'app/tpl/header.html'"></div>
+
+<div class="form-left-col">	
+	<label>Id:</label>
+	<input name="id" type="text" value="{{ note.id }}" disabled />
+	<br />
+	<label>Name:</label>
+	<input type="text" name="note.name" value="{{ note.name }}" required/>
+	<br />
+	<label>Content:</label>
+	<textarea name="note.content">{{ note.content }}</textarea>
+	<br />
+	<button class="save" ng:click="saveNote()">Save</button>
+	<button class="delete" ng:click="deleteNote()">Delete</button>
+
+</div>

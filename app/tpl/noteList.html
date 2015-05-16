@@ -1,0 +1,7 @@
+<div ng-include="'app/tpl/header.html'"></div>
+
+<ul ng:controller="NoteListCtrl">
+	<li ng:repeat="note in notes">
+		<a href='#/note/{{ note.id }}'>{{ note.name }}</a>
+	</li>
+</ul>

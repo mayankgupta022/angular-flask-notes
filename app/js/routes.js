@@ -2,16 +2,19 @@
 
 define(['angular', 'app'], function(angular, app) {
 
+	document.url = "http://localhost/rememberMe/";
+
 	return app.config(['$routeProvider', function($routeProvider) {
-		$routeProvider.when('/view1', {
-			templateUrl: 'app/tpl/partial1.html',
-			controller: 'MyCtrl1'
+		$routeProvider.when('/notes', {
+			templateUrl: 'app/tpl/noteList.html',
+			controller: 'NoteListCtrl'
 		});
-		$routeProvider.when('/view2', {
-			templateUrl: 'app/tpl/partial2.html',
-			controller: 'MyCtrl2'
+		$routeProvider.when('/note/:noteId', {
+			templateUrl: 'app/tpl/noteDetails.html',
+			controller: 'NoteDetailsCtrl'
 		});
-		$routeProvider.otherwise({redirectTo: '/view1'});
+		$routeProvider.otherwise({redirectTo: '/notes'});
+
 	}]);
 
 });
