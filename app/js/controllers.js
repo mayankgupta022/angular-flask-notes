@@ -28,14 +28,16 @@ define(['angular', 'services'], function (angular) {
 						console.log(data);
 					});
 
-			$scope.saveNote = function() {
-				var url
+			$scope.saveNote = function(Note) {
+				var url;
 				if($routeParams.noteId == 'new')
 					url = document.url + 'newNote';
 				else
 					url = document.url + 'saveNote';
 
-				console.log($scope.note);
+				console.log($scope);
+				console.log(Note);
+				console.log($routeParams);
 				$http.post(url, $scope.note).
 					success(function(data, status, headers, config) {
 						$scope.notes = data;

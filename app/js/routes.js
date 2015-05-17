@@ -3,6 +3,7 @@
 define(['angular', 'app'], function(angular, app) {
 
 	document.url = "http://m-remember-me.appspot.com/";
+	// document.url = "http://localhost:8080/";
 
 	return app.config(['$routeProvider', function($routeProvider) {
 		$routeProvider.when('/notes', {

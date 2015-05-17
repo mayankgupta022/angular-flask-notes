@@ -53,15 +53,14 @@ def newNote():
 def saveNote():
 	# note = NoteModel.get_by_id(request.form['id'])
 	# note_key = ndb.Key(urlsafe=str(request.form['id']))
-	note_key = ndb.Key(NoteModel, str(request.form['id']))
+	note_key = ndb.Key(NoteModel, int(request.form['id']))
 	note = note_key.get()
 	note.name = request.form['name']
 	note.content = request.form['content']
 	note.put()
 	info = dict()
-	# info['note_key'] = note_key
 	info['status'] = 0
-	# info['data'] = note.to_dict()
+	info['data'] = note.to_dict()
 
 	return json.dumps(info)
 
